@@ -49,7 +49,9 @@ projects/[프로젝트명]/
 ├── index.html       # 엔트리 포인트
 ├── app.js           # 애플리케이션 코드
 ├── README.md        # 프로젝트 설명
-└── harness-usage.md # 하네스 활용 기록
+├── harness-usage.md # 하네스 활용 기록
+└── tc/              # 검증 체크리스트 (생성/수정 시마다 작성)
+    └── checklist-vX.Y.Z.md
 ```
 
 ## MCP 도구 사용 매핑
