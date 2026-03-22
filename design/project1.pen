@@ -165,7 +165,8 @@
                   "content": "Crafting Digital\nExperiences with\nElegance",
                   "lineHeight": 1.05,
                   "fontFamily": "Cormorant Garamond",
-                  "fontSize": 64
+                  "fontSize": 64,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -177,7 +178,8 @@
                   "content": "I design and build beautiful, modern web experiences that transform ideas into stunning digital realities.",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 18
+                  "fontSize": 18,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
@@ -274,6 +276,352 @@
                 "thickness": 1,
                 "fill": "#3A3A3C"
               }
+            },
+            {
+              "type": "frame",
+              "id": "bQl17",
+              "name": "Hero Image",
+              "width": 500,
+              "height": 500,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "./images/generated-1774193681350.png",
+                "mode": "fill"
+              },
+              "cornerRadius": 20,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#3A3A3C"
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "uW7is",
+          "name": "Features Section",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": 80,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "EUANx",
+              "name": "sectionHeader",
+              "layout": "vertical",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Bw7Ux",
+                  "name": "sectionLabel",
+                  "fill": "#C9A962",
+                  "content": "WHAT I DO",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500",
+                  "letterSpacing": 3
+                },
+                {
+                  "type": "text",
+                  "id": "YgWiX",
+                  "name": "sectionTitle",
+                  "fill": "#F5F5F0",
+                  "content": "Services & Expertise",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 42
+                },
+                {
+                  "type": "text",
+                  "id": "CeEJR",
+                  "name": "sectionDesc",
+                  "fill": "#6E6E70",
+                  "content": "Bringing ideas to life through thoughtful design and clean code",
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "uFsoR",
+              "name": "Feature Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "tyS4b",
+                  "name": "card1",
+                  "width": "fill_container",
+                  "fill": "#242426",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#3A3A3C"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "5BxrS",
+                      "name": "icon1",
+                      "width": 32,
+                      "height": 32,
+                      "iconFontName": "pen-tool",
+                      "iconFontFamily": "lucide",
+                      "fill": "#C9A962"
+                    },
+                    {
+                      "type": "text",
+                      "id": "5drNP",
+                      "name": "cardTitle1",
+                      "fill": "#F5F5F0",
+                      "content": "UI/UX Design",
+                      "fontFamily": "Cormorant Garamond",
+                      "fontSize": 22,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FkQN7",
+                      "name": "cardDesc1",
+                      "fill": "#6E6E70",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Creating intuitive and beautiful interfaces that users love. From wireframes to high-fidelity prototypes.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "5gsZt",
+                  "name": "card2",
+                  "width": "fill_container",
+                  "fill": "#242426",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#3A3A3C"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "vLBbv",
+                      "name": "icon2",
+                      "width": 32,
+                      "height": 32,
+                      "iconFontName": "code",
+                      "iconFontFamily": "lucide",
+                      "fill": "#C9A962"
+                    },
+                    {
+                      "type": "text",
+                      "id": "i1R61",
+                      "name": "cardTitle2",
+                      "fill": "#F5F5F0",
+                      "content": "Web Development",
+                      "fontFamily": "Cormorant Garamond",
+                      "fontSize": 22,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "u6Z9k",
+                      "name": "cardDesc2",
+                      "fill": "#6E6E70",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Building fast, responsive, and accessible web applications with modern technologies and best practices.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OWa75",
+                  "name": "card3",
+                  "width": "fill_container",
+                  "fill": "#242426",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#3A3A3C"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "szrj1",
+                      "name": "icon3",
+                      "width": 32,
+                      "height": 32,
+                      "iconFontName": "smartphone",
+                      "iconFontFamily": "lucide",
+                      "fill": "#C9A962"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hf4M5",
+                      "name": "cardTitle3",
+                      "fill": "#F5F5F0",
+                      "content": "Mobile First",
+                      "fontFamily": "Cormorant Garamond",
+                      "fontSize": 22,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4DVZM",
+                      "name": "cardDesc3",
+                      "fill": "#6E6E70",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Designing responsive experiences that look and work beautifully across all devices and screen sizes.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "i9nia",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "#242426",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "top": 1
+            },
+            "fill": "#3A3A3C"
+          },
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            60,
+            80
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "EeXZQ",
+              "name": "footerTop",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CGsU1",
+                  "name": "footerLogo",
+                  "fill": "#C9A962",
+                  "content": "PORTFOLIO",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 24,
+                  "fontWeight": "500",
+                  "letterSpacing": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "VfwnE",
+                  "name": "footerNav",
+                  "gap": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "bTVM3",
+                      "name": "fNav1",
+                      "fill": "#6E6E70",
+                      "content": "About",
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    },
+                    {
+                      "type": "text",
+                      "id": "goLSp",
+                      "name": "fNav2",
+                      "fill": "#6E6E70",
+                      "content": "Work",
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    },
+                    {
+                      "type": "text",
+                      "id": "P6aZz",
+                      "name": "fNav3",
+                      "fill": "#6E6E70",
+                      "content": "Contact",
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "line",
+              "id": "r4j08",
+              "name": "divider",
+              "width": "fill_container",
+              "height": 0,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#3A3A3C"
+              }
+            },
+            {
+              "type": "frame",
+              "id": "nO0ln",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4Baec",
+                  "name": "copyright",
+                  "fill": "#4A4A4C",
+                  "content": "© 2026 Portfolio. All rights reserved.",
+                  "fontFamily": "Inter",
+                  "fontSize": 12
+                },
+                {
+                  "type": "text",
+                  "id": "lcgYz",
+                  "name": "madeWith",
+                  "fill": "#4A4A4C",
+                  "content": "Made with React & Tailwind CSS",
+                  "fontFamily": "Inter",
+                  "fontSize": 12
+                }
+              ]
             }
           ]
         }
