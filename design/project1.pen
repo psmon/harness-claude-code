@@ -1,0 +1,283 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "5Pp8l",
+      "x": 0,
+      "y": 0,
+      "name": "Intro Landing Page",
+      "width": 1440,
+      "fill": "#1A1A1C",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "qvQNc",
+          "name": "Header",
+          "width": "fill_container",
+          "fill": "#1A1A1C",
+          "padding": [
+            20,
+            80
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "5HAYm",
+              "name": "logo",
+              "fill": "#C9A962",
+              "content": "PORTFOLIO",
+              "fontFamily": "Cormorant Garamond",
+              "fontSize": 24,
+              "fontWeight": "500",
+              "letterSpacing": 3
+            },
+            {
+              "type": "frame",
+              "id": "0qlTL",
+              "name": "Nav Links",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "G3Zya",
+                  "name": "navAbout",
+                  "fill": "#F5F5F0",
+                  "content": "About",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "ycYqA",
+                  "name": "navWork",
+                  "fill": "#F5F5F0",
+                  "content": "Work",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "aUgdy",
+                  "name": "navContact",
+                  "fill": "#F5F5F0",
+                  "content": "Contact",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "5hkQd",
+                  "name": "ctaBtn",
+                  "fill": "#C9A962",
+                  "cornerRadius": 20,
+                  "padding": [
+                    10,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "o0Uys",
+                      "name": "ctaText",
+                      "fill": "#1A1A1C",
+                      "content": "Get Started",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "pZaq2",
+          "name": "Hero Section",
+          "width": "fill_container",
+          "gap": 60,
+          "padding": 80,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "JABbK",
+              "name": "Hero Text",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "J63eT",
+                  "name": "badge",
+                  "fill": "#242426",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#3A3A3C"
+                  },
+                  "gap": 8,
+                  "padding": [
+                    6,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "Yfky9",
+                      "name": "badgeDot",
+                      "fill": "#C9A962",
+                      "width": 8,
+                      "height": 8
+                    },
+                    {
+                      "type": "text",
+                      "id": "W13KS",
+                      "name": "badgeText",
+                      "fill": "#6E6E70",
+                      "content": "CREATIVE DEVELOPER",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "500",
+                      "letterSpacing": 3
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "xMbUs",
+                  "name": "headline",
+                  "fill": "#F5F5F0",
+                  "content": "Crafting Digital\nExperiences with\nElegance",
+                  "lineHeight": 1.05,
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 64
+                },
+                {
+                  "type": "text",
+                  "id": "7Ixvb",
+                  "name": "subline",
+                  "fill": "#6E6E70",
+                  "textGrowth": "fixed-width",
+                  "width": 480,
+                  "content": "I design and build beautiful, modern web experiences that transform ideas into stunning digital realities.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 18
+                },
+                {
+                  "type": "frame",
+                  "id": "lZFKv",
+                  "name": "heroCtas",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "qA5Tp",
+                      "name": "primaryBtn",
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#C9A962",
+                            "position": 0
+                          },
+                          {
+                            "color": "#8B7845",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 20,
+                      "padding": [
+                        16,
+                        32
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "4BpsH",
+                          "name": "primaryText",
+                          "fill": "#1A1A1C",
+                          "content": "View My Work",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zKCOM",
+                      "name": "secondBtn",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#3A3A3C"
+                      },
+                      "padding": [
+                        16,
+                        32
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SDN2b",
+                          "name": "secondText",
+                          "fill": "#F5F5F0",
+                          "content": "About Me",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zrGOS",
+              "name": "Hero Image",
+              "width": 500,
+              "height": 500,
+              "cornerRadius": 20,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#3A3A3C"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -249,3 +249,76 @@ graph LR
 | SendMessage | 실시간 에이전트 간 통신 |
 | TaskCreate/Update | 작업 추적 |
 | 파일 기록 | Workspace/Artifacts 영속화 |
+
+---
+
+## 프로젝트 생성 워크플로우 (v0.0.4 추가)
+
+> 출처: projects/sample1 생성 여정 (2026-03-23)
+
+### PRD → 프로젝트 생성 파이프라인
+
+```mermaid
+flowchart LR
+    PRD[PRD 메모리<br/>memorizer] --> D[Phase A<br/>디자인<br/>Pencil MCP]
+    PRD --> S[Phase B<br/>레퍼런스 검색<br/>WebSearch]
+    D --> C[Phase C<br/>코드 생성<br/>Write]
+    S --> C
+    C --> R[Phase D<br/>하네스 기록<br/>harness-usage.md]
+    R --> U[Phase E<br/>하네스 업그레이드<br/>harness-create]
+    U -.->|피드백 루프| PRD
+```
+
+### 프로젝트 생성 시 3계층 활용
+
+```mermaid
+graph TD
+    subgraph "Layer 1: knowledge/"
+        K1[project-creation.md<br/>파이프라인 지식]
+        K2[memorizer PRD<br/>요구사항]
+        K3[Pencil 디자인<br/>가이드라인]
+    end
+    subgraph "Layer 2: agents/"
+        A1[architect<br/>디자인 + 코드]
+        A2[memory-curator<br/>PRD + 검색]
+        A3[journey-recorder<br/>기록]
+    end
+    subgraph "Layer 3: engine/"
+        E1[project-creation-workflow.md<br/>5단계 워크플로우]
+    end
+    subgraph "산출물"
+        P1[projects/sample1/]
+        P2[harness-usage.md]
+        P3[design/project1.pen]
+    end
+
+    K1 --> A1
+    K2 --> A2
+    K3 --> A1
+    A1 --> P1
+    A1 --> P3
+    A2 --> A1
+    A3 --> P2
+    E1 -.->|상태 관리| A1
+    E1 -.->|상태 관리| A3
+```
+
+### 디렉토리 구조 (projects/ 추가)
+
+```mermaid
+graph TD
+    ROOT[harness-claude-code] --> L1[knowledge/<br/>Layer 1]
+    ROOT --> L2[agents/<br/>Layer 2]
+    ROOT --> L3[engine/<br/>Layer 3]
+    ROOT --> PJ[projects/<br/>하네스 활용 프로젝트]
+    ROOT --> DS[design/<br/>블루프린트 + 프로젝트 디자인]
+    ROOT --> DC[docs/<br/>여정 기록]
+
+    PJ --> S1[sample1/<br/>React 소개 페이지]
+    DS --> BP[blueprint.pen<br/>하네스 블루프린트]
+    DS --> P1[project1.pen<br/>sample1 디자인]
+
+    L1 -.->|PRD 파이프라인| PJ
+    L2 -.->|에이전트 실행| PJ
+    L3 -.->|워크플로우 관리| PJ
+```

@@ -63,6 +63,7 @@ harness-claude-code/
 ├── servers/         # MCP 서버 연동 설정
 ├── design/          # 시각적 설계 자산 (blueprint.pen, architecture.md)
 ├── docs/            # 버전 히스토리 & 여정 기록
+├── projects/        # 하네스 활용 프로젝트
 ├── prompt/          # 프롬프트 아카이브
 ├── README.md
 └── harness.config.json
@@ -92,6 +93,7 @@ harness-claude-code/
 | v0.0.1 | 2026-03-22 | 초기 디렉토리 구조 설계 |
 | v0.0.2 | 2026-03-22 | revfactory 하네스 학습 & 레이아웃 보강 |
 | v0.0.3 | 2026-03-22 | Agentic Loop 통합 & 첫 에이전트 3종 정의 |
+| v0.0.4 | 2026-03-23 | 프로젝트 생성 워크플로우 & 첫 프로젝트 (sample1) |
 
 ## 라이선스 & 고지
 
