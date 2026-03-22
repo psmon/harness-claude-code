@@ -4,7 +4,8 @@
       "mcp__memorizer__get",
       "Bash(git:*)",
       "mcp__memorizer__get_many",
-      "mcp__memorizer__search"
+      "mcp__memorizer__search",
+      "WebSearch"
     ]
   }
 }
