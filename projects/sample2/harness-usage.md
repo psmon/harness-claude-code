@@ -90,3 +90,64 @@
 | Agentic Loop 적용 | 20/20 | Gather→Action→Verify 완전 적용, Playwright 1차 PASS |
 | 개선 피드백 품질 | 18/20 | 구체적 관찰 + PRD 없는 경우 대체 흐름 제안 |
 | **총점** | **91/100** | **등급: A** |
+
+---
+
+## 디자인 리뉴얼 (2026-03-23 추가)
+
+### 변경 배경
+사용자 요청: "디자인을 더 모던하게, 펜슬로부터 디자인을 하기"
+기존 Monochrome Type (흑백 미니멀) → Dark Classy (다크 모드 + 오렌지 액센트 + 에디토리얼 세리프)
+
+### Pencil MCP 디자인 프로세스
+
+| 단계 | MCP 도구 | 설명 |
+|------|---------|------|
+| 1 | `get_style_guide` | Dark Classy Dashboard 스타일 가이드 선정 (vibrant, gradient, premium 태그) |
+| 2 | `open_document("new")` | 새 .pen 파일 생성 |
+| 3 | `batch_design` (3회) | Header → 페이지 타이틀 + badge → 테이블(헤더 + 3행) 순차 디자인 |
+| 4 | `get_screenshot` | 디자인 시각 검증 |
+| 5 | 코드 반영 | Pencil 색상/타이포를 Tailwind config에 충실히 반영 |
+
+### 디자인 → 코드 매핑
+
+| Pencil 디자인 요소 | 코드 반영 |
+|-------------------|----------|
+| #0A0A0B 페이지 배경 | `page: '#0A0A0B'` |
+| #141417 카드 배경 | `surface: '#141417'` |
+| #FF5C00 오렌지 액센트 | `accent: '#FF5C00'` |
+| Instrument Serif 38px 타이틀 | `font-serif text-[38px]` |
+| DM Mono 20px 로고 | `font-mono text-xl tracking-[4px]` |
+| DM Mono 13px 숫자 | `font-mono text-[13px]` for No/Views |
+| #FF5C0018 틴트 badge | `accent-tint` pill badge |
+
+### 3계층 활용 (수정 작업)
+
+| 계층 | 활용 내용 |
+|------|----------|
+| knowledge/ | Pencil get_style_guide (Dark Classy), get_guidelines (web-app) |
+| agents/ | architect: Pencil 디자인 + 코드 반영, journey-recorder: 체크리스트 |
+| engine/ | project-creation-workflow Phase D(verifying) — Playwright Desktop+Mobile PASS |
+
+### Playwright 검증 결과
+
+| 뷰포트 | 결과 |
+|--------|------|
+| Desktop (1280x720) | PASS |
+| Mobile (375x812) | PASS |
+
+### 하네스 평가 점수 (리뉴얼 후 재평가)
+
+| 평가 축 | 점수 | 비고 |
+|---------|------|------|
+| knowledge/ 활용도 | 20/20 | Pencil 디자인 프로세스 완전 수행 (스타일 가이드 → .pen 디자인 → 코드) |
+| agents/ 역할 분리 | 20/20 | architect(디자인+코드), journey-recorder(기록) |
+| engine/ 워크플로우 | 20/20 | verifying 상태 포함 5상태 전이 완수 |
+| Agentic Loop 적용 | 20/20 | Gather(Pencil)→Action(코드)→Verify(Playwright) 완전 순환 |
+| 개선 피드백 품질 | 18/20 | Pencil → 코드 매핑 프로세스 구체적 기록 |
+| **총점** | **98/100** | **등급: A** |
+
+### 점수 변화
+- **이전**: 91/100 (knowledge 15 — PRD 없음, WebSearch 미수행)
+- **현재**: 98/100 (knowledge 20 — Pencil 디자인 프로세스 완전 수행)
+- **개선 요인**: "펜슬로부터 디자인을 하기" 요청에 따라 .pen 파일 디자인 → 코드 반영 파이프라인이 완전히 작동
