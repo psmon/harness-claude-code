@@ -1,6 +1,6 @@
 # harness-claude-code
 
-![하네서 디벨롭 컨셉](/design/concept.png)
+![하네스 디벨롭 컨셉](/design/concept.png)
 
 > 다양한 하네스 오픈소스를 개념을 학습하고, 메모리 MCP 지식 + Pencil MCP 시각화로 나만의 Claude Code 하네스를 조립해 나가는 프로젝트 Pencial의 블루프린트로부터 시작해 완성해 나가는 여정을 공유합니다.
 
@@ -25,7 +25,7 @@
 
 | 프로젝트                                                                    | 참고 내용                                                                                  | 라이선스 |
 |-------------------------------------------------------------------------|----------------------------------------------------------------------------------------|----------|
-| [moemorizer](https://github.com/psmon/memorizer-v1)                     | 셀프구축가능 자체제작 메모라이저 활용                                                                   | Apache 2.0 |
+| [memorizer](https://github.com/psmon/memorizer-v1)                     | 셀프구축가능 자체제작 메모라이저 활용                                                                   | Apache 2.0 |
 | [bkit-claude-code](https://github.com/popup-studio-ai/bkit-claude-code) | Context Engineering 3계층 아키텍처, PDCA 방법론, Hook 시스템, Agent/Skill 구조                       | Apache 2.0 |
 | [revfactory](https://github.com/revfactory) 하네스 설계                      | 도메인 분석 기반 6-Phase 워크플로우, Agent Team & Skill Architect, 오케스트레이터 패턴, Two Execution Modes | - |
 
