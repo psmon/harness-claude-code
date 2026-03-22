@@ -1,6 +1,6 @@
 {
   "name": "harness-claude-code",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Memory-driven harness for Claude Code",
   "mcp": {
     "memorizer": { "required": true },

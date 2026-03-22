@@ -5,11 +5,15 @@
 bkit의 PDCA State Machine 대신, Journey(여정) 기반 상태 모델을 사용합니다.
 
 ## 개발 예정
-- [ ] Journey 상태 모델 정의 (prompt -> plan -> build -> record)
+- [x] Journey 상태 모델 정의 (prompt -> plan -> build -> record) — v0.0.3 Agentic Loop 통합
 - [ ] 버전 넘버링 자동화 (v0.0.x)
 - [ ] 프롬프트-결과 매핑 추적
 - [ ] 블루프린트 변경 이력 관리
 - [ ] 여정 타임라인 생성기
+
+### v0.0.3 추가 — Agentic Loop 통합 & 오케스트레이터 패턴
+- [x] `agentic-loop-integration.md` — Journey ↔ Agentic Loop 매핑, 오케스트레이터 패턴 3종
+- [x] 에이전트 실행 모드 선택 기준 정의 (팀 모드 vs 시니어 모드)
 
 ### v0.0.2 추가 — 워크플로우 & 오케스트레이션 (revfactory 참고)
 - [ ] **워크플로우 엔진** (Phase 5): 에이전트 실행 흐름 정의 및 관리

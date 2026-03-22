@@ -92,6 +92,89 @@ sequenceDiagram
 
 ---
 
+## Agentic Loop ↔ Journey 통합 모델 (v0.0.3 추가)
+
+> 출처: memorizer `aa36789f` (악분 - Claude Code 동작 원리 Part 1)
+
+### Agentic Loop
+
+```mermaid
+flowchart LR
+    User[사용자] --> GC[Gather Context<br/>맥락 수집]
+    GC --> TA[Take Action<br/>행동]
+    TA --> VR[Verify Results<br/>검증]
+    VR -->|반복| GC
+    VR -->|완료| Done[작업 완료]
+```
+
+### Journey ↔ Agentic Loop 매핑
+
+```mermaid
+graph TB
+    subgraph Journey["Journey 상태 모델"]
+        idle --> prompted --> planning --> building --> recording --> idle
+    end
+    subgraph AgenticLoop["Agentic Loop"]
+        GC[Gather Context] --> TA[Take Action] --> VR[Verify Results]
+        VR -.->|반복| GC
+    end
+    planning -.-> GC
+    building -.-> TA
+    recording -.-> VR
+```
+
+### 하네스 6대 구성요소 → 디렉토리 매핑
+
+```mermaid
+graph LR
+    subgraph Harness["AI Agent = AI 모델 + Harness"]
+        T[1. Tools] --> SV[servers/]
+        P[2. Permission] --> HK[hooks/]
+        SB[3. Sandbox] --> SC[scripts/]
+        SE[4. Session] --> EN[engine/]
+        CTX[5. Context/Memory] --> KN[knowledge/]
+        EXT[6. Extensibility] --> SK[.claude/skills/]
+    end
+```
+
+### 에이전트 3종과 Agentic Loop
+
+```mermaid
+graph TD
+    subgraph AgenticLoop["Agentic Loop"]
+        GC[Gather Context]
+        TA[Take Action]
+        VR[Verify Results]
+        GC --> TA --> VR
+        VR -.->|반복| GC
+    end
+
+    ARC[architect] -->|주도| GC
+    ARC -->|주도| TA
+    MC[memory-curator] -->|지원| GC
+    JR[journey-recorder] -->|주도| VR
+```
+
+### 오케스트레이터 패턴
+
+```mermaid
+graph LR
+    subgraph Chain["Chain (기본)"]
+        C1[architect<br/>planning] --> C2[architect<br/>building] --> C3[journey-recorder<br/>recording]
+    end
+    subgraph Parallel["Parallel (지식 보강)"]
+        P1[architect<br/>planning] --> P3[architect<br/>building]
+        P2[memory-curator<br/>search] --> P3
+    end
+    subgraph Verify["Verify (검증 실패)"]
+        V1[building] --> V2[recording] --> V3{검증?}
+        V3 -->|실패| V4[planning 복귀]
+        V3 -->|성공| V5[완료]
+    end
+```
+
+---
+
 ## revfactory 하네스: Agent Team & Skill Architect (v0.0.2 추가)
 
 > 출처: [revfactory](https://github.com/revfactory) — 도메인 분석 기반 하네스 설계

@@ -6,11 +6,15 @@ bkit의 Skills 계층에 해당하지만, 정적 마크다운이 아닌
 메모리 MCP 검색을 통한 동적 지식 로딩이 핵심 차별점입니다.
 
 ## 개발 예정
-- [ ] 메모리 MCP 연동 패턴 정의 (search, get, get_many)
+- [x] 메모리 MCP 연동 패턴 정의 (search, get, get_many) — v0.0.3 harness-six-components.md에 반영
 - [ ] 지식 카테고리 분류 체계 설계
 - [ ] 스킬 정의 포맷 (SKILL.md frontmatter 표준)
 - [ ] 메모리 -> 스킬 변환 파이프라인 설계
 - [ ] 지식 그래프 시각화 (Pencil MCP 연동)
+
+### v0.0.3 추가 — Agentic Loop & 6대 구성요소
+- [x] `agentic-loop.md` — 핵심 실행 모델 지식 스킬
+- [x] `harness-six-components.md` — 하네스 6대 구성요소 → 디렉토리 매핑
 
 ### v0.0.2 추가 — 도메인 분석 기반 (revfactory 참고)
 - [ ] **도메인 분석 워크플로우** (Phase 1): 문제 영역을 먼저 분석하는 진입점 역할

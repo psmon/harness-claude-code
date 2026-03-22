@@ -5,7 +5,10 @@
       "Bash(git:*)",
       "mcp__memorizer__get_many",
       "mcp__memorizer__search",
-      "WebSearch"
+      "WebSearch",
+      "mcp__memorizer__search_graph",
+      "Skill(harness-create)",
+      "Bash(ls -1 D:/Code/AI/harness-claude-code/docs/v*.md)"
     ]
   }
 }
