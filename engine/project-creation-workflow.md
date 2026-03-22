@@ -15,12 +15,15 @@ stateDiagram-v2
     idle --> prompted: PRD 메모리 확인
     prompted --> planning: 디자인 + 레퍼런스 검색
     planning --> building: 프로젝트 코드 생성
-    building --> recording: harness-usage.md 작성
+    building --> verifying: Playwright 브라우저 검증
+    verifying --> building: 검증 실패 시 수정
+    verifying --> recording: 검증 통과
     recording --> idle: 하네스 업그레이드 완료
 
     note right of planning: Gather Context\n(Pencil MCP + WebSearch)
     note right of building: Take Action\n(Write + Edit)
-    note right of recording: Verify Results\n(harness-create 스킬)
+    note right of verifying: Verify Results\n(Playwright CLI)
+    note right of recording: Record\n(harness-usage.md)
 ```
 
 ## 단계별 상세
@@ -44,14 +47,24 @@ stateDiagram-v2
 - **산출물**: projects/[프로젝트명]/ 하위 파일들
 - **원칙**: 디자인 파일의 색상/타이포/레이아웃을 충실히 코드에 반영
 
-### Phase D: 하네스 사용 기록 (recording)
+### Phase D: Playwright 검증 (verifying)
 - **트리거**: Phase C 완료
+- **도구**: Playwright CLI (`npx playwright screenshot`)
+- **검증 대상**:
+  - Chromium Desktop (1280x720) — 데스크톱 렌더링
+  - Chromium Mobile (375x812) — 모바일 반응형
+- **산출물**: `tc/screenshot-desktop.png`, `tc/screenshot-mobile.png`, `tc/checklist-*-playwright.md`
+- **판정**: PASS → Phase E 진행 / FAIL → Phase C로 복귀하여 수정
+- **상세**: `engine/playwright-verification.md` 참조
+
+### Phase E: 하네스 사용 기록 (recording)
+- **트리거**: Phase D 검증 통과
 - **에이전트**: journey-recorder
 - **도구**: Write
 - **산출물**: projects/[프로젝트명]/harness-usage.md
 
-### Phase E: 하네스 업그레이드 (새 여정 순환)
-- **트리거**: Phase D 완료 + 개선 관찰사항 존재
+### Phase F: 하네스 업그레이드 (새 여정 순환)
+- **트리거**: Phase E 완료 + 개선 관찰사항 존재
 - **에이전트**: architect + journey-recorder
 - **도구**: harness-create 스킬
 - **산출물**: 필수 4종 (docs/vX.Y.Z.md, README.md, blueprint.pen, architecture.md)
@@ -59,18 +72,22 @@ stateDiagram-v2
 ## 오케스트레이터 패턴
 
 ```
-Phase A + Phase B (Parallel)
+Phase A + Phase B (Parallel) — 디자인 + 검색
      ↓
-Phase C (Chain)
+Phase C (Chain) — 코드 생성
      ↓
-Phase D (Chain)
+Phase D (Verify) — Playwright 검증
+     ↓ FAIL → Phase C 복귀
+     ↓ PASS
+Phase E (Chain) — 하네스 기록
      ↓
-Phase E (Chain → 새 여정 순환)
+Phase F (Chain → 새 여정 순환) — 하네스 업그레이드
 ```
 
 ## 검증 체크리스트
 
-- [ ] 프로젝트가 브라우저에서 정상 렌더링되는가?
+- [ ] Playwright Desktop 스크린샷이 정상 렌더링되는가? (Chromium 1280x720)
+- [ ] Playwright Mobile 스크린샷이 정상 렌더링되는가? (Chromium 375x812)
 - [ ] 디자인 파일과 코드의 시각적 일관성이 있는가?
 - [ ] harness-usage.md에 3계층 활용 내역이 기록되었는가?
 - [ ] 하네스 업그레이드 필수 4종이 갱신되었는가?

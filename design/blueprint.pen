@@ -2949,7 +2949,8 @@
           "fill": "#8888AA",
           "content": "PRD 메모리 → Pencil 디자인 → React 코드 → 하네스 기록 → 업그레이드",
           "fontFamily": "Inter",
-          "fontSize": 13
+          "fontSize": 13,
+          "fontWeight": "normal"
         },
         {
           "type": "text",
@@ -3013,7 +3014,8 @@
                   "content": "memorizer.get",
                   "textAlign": "center",
                   "fontFamily": "Inter",
-                  "fontSize": 9
+                  "fontSize": 9,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3071,7 +3073,8 @@
                   "content": "Pencil MCP",
                   "textAlign": "center",
                   "fontFamily": "Inter",
-                  "fontSize": 9
+                  "fontSize": 9,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3129,7 +3132,8 @@
                   "content": "React+Tailwind",
                   "textAlign": "center",
                   "fontFamily": "Inter",
-                  "fontSize": 9
+                  "fontSize": 9,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3187,7 +3191,8 @@
                   "content": "harness-usage.md",
                   "textAlign": "center",
                   "fontFamily": "Inter",
-                  "fontSize": 9
+                  "fontSize": 9,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3250,7 +3255,8 @@
                   "content": "harness-create",
                   "textAlign": "center",
                   "fontFamily": "Inter",
-                  "fontSize": 9
+                  "fontSize": 9,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -3316,7 +3322,8 @@
                   "fill": "#8AAA8A",
                   "content": "• memorizer PRD 조회",
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -3325,7 +3332,8 @@
                   "fill": "#8AAA8A",
                   "content": "• Pencil 가이드라인",
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -3382,7 +3390,8 @@
                   "fill": "#C0B090",
                   "content": "• memory-curator → PRD+검색",
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -3391,7 +3400,8 @@
                   "fill": "#C0B090",
                   "content": "• journey-recorder → 기록",
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -3448,7 +3458,8 @@
                   "fill": "#9090C0",
                   "content": "• Journey: planning→building→recording",
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -3457,7 +3468,8 @@
                   "fill": "#9090C0",
                   "content": "• Parallel + Chain 오케스트레이션",
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -3519,7 +3531,8 @@
                   "content": "├ index.html (React 18 CDN)\n├ app.js (컴포넌트)\n├ README.md\n└ harness-usage.md",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3552,7 +3565,8 @@
                   "content": "└ project-creation.md\n   PRD→디자인→코드\n   파이프라인 정의",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3585,7 +3599,8 @@
                   "content": "└ project-creation-workflow.md\n   5단계 워크플로우\n   Journey↔Agentic Loop",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3618,7 +3633,8 @@
                   "content": "version: 0.0.4\nprojects.path: projects/\nprojects.designPath: design/",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 10
+                  "fontSize": 10,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -3642,7 +3658,415 @@
           "fill": "#6E6E90",
           "content": "date: 2026-03-23 · prompt: 05-하네스이용-프로젝트생성.md · PRD: memorizer c8f7f8e4",
           "fontFamily": "Inter",
-          "fontSize": 10
+          "fontSize": 10,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "9PT94",
+      "x": 3800,
+      "y": 0,
+      "name": "v0.0.5 - Playwright Verification Workflow",
+      "width": 900,
+      "height": 600,
+      "fill": "#1A1A2E",
+      "cornerRadius": 16,
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "type": "text",
+          "id": "uaFEM",
+          "name": "title",
+          "fill": "#C9A962",
+          "content": "v0.0.5 — Playwright Verification",
+          "fontFamily": "Inter",
+          "fontSize": 24,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "jQap5",
+          "name": "subtitle",
+          "fill": "#9CA3AF",
+          "content": "Journey: building → verifying → recording",
+          "fontFamily": "Inter",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "HfAav",
+          "name": "flowRow",
+          "width": "fill_container",
+          "height": 80,
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "lBCAV",
+              "name": "box1",
+              "width": 130,
+              "height": "fill_container",
+              "fill": "#242426",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "rLA88",
+                  "name": "lbl1",
+                  "fill": "#60A5FA",
+                  "content": "building",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "IYNEj",
+                  "name": "desc1",
+                  "fill": "#6B7280",
+                  "content": "코드 생성",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "pPm4d",
+              "name": "arrow1",
+              "fill": "#C9A962",
+              "content": "→",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 24,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "3P5uX",
+              "name": "box2",
+              "width": 200,
+              "height": "fill_container",
+              "fill": "#1E3A2F",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mb68b",
+                  "name": "lbl2",
+                  "fill": "#10B981",
+                  "content": "verifying (NEW)",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "afBOR",
+                  "name": "desc2",
+                  "fill": "#6EE7B7",
+                  "content": "Playwright CLI",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "VNFRU",
+              "name": "arrow2",
+              "fill": "#C9A962",
+              "content": "→",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 24,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "lWhjh",
+              "name": "box3",
+              "width": 130,
+              "height": "fill_container",
+              "fill": "#242426",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "1DKUe",
+                  "name": "lbl3",
+                  "fill": "#60A5FA",
+                  "content": "recording",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "4WHN1",
+                  "name": "desc3",
+                  "fill": "#6B7280",
+                  "content": "하네스 기록",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qRT59",
+          "name": "browserRow",
+          "width": "fill_container",
+          "height": 100,
+          "gap": 20,
+          "children": [
+            {
+              "type": "frame",
+              "id": "fDR4t",
+              "name": "dtBox",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#242426",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "3OEXm",
+                  "name": "dtIcon",
+                  "fill": "#E5E7EB",
+                  "content": "🖥 Desktop",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "mE8m7",
+                  "name": "dtSpec",
+                  "fill": "#9CA3AF",
+                  "content": "Chromium 1280×720",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "RdPy2",
+                  "name": "dtStatus",
+                  "fill": "#10B981",
+                  "content": "✓ PASS required",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "5IbCu",
+              "name": "mbBox",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#242426",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "TkTJP",
+                  "name": "mbIcon",
+                  "fill": "#E5E7EB",
+                  "content": "📱 Mobile",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "ACcGR",
+                  "name": "mbSpec",
+                  "fill": "#9CA3AF",
+                  "content": "Chromium 375×812",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "dumkz",
+                  "name": "mbStatus",
+                  "fill": "#10B981",
+                  "content": "✓ PASS required",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "8yzVV",
+              "name": "ffBox",
+              "opacity": 0.4,
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#242426",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "IlAtp",
+                  "name": "ffIcon",
+                  "fill": "#6B7280",
+                  "content": "🦊 Firefox",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "qxBUq",
+                  "name": "ffSpec",
+                  "fill": "#4B5563",
+                  "content": "제외",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "udAIq",
+                  "name": "ffStatus",
+                  "fill": "#EF4444",
+                  "content": "✗ Babel 호환 이슈",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eTHy1",
+          "name": "loopRow",
+          "width": "fill_container",
+          "height": 70,
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "8kqMr",
+              "name": "passBox",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#064E3B",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "7XPXt",
+                  "name": "passLbl",
+                  "fill": "#6EE7B7",
+                  "content": "✓ PASS → recording",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "BUrRz",
+                  "name": "passDesc",
+                  "fill": "#9CA3AF",
+                  "content": "스크린샷 정상 → 하네스 기록 진행",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LIrYr",
+              "name": "failBox",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#450A0A",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "oA4I4",
+                  "name": "failLbl",
+                  "fill": "#FCA5A5",
+                  "content": "✗ FAIL → building 복귀",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "mYx0H",
+                  "name": "failDesc",
+                  "fill": "#9CA3AF",
+                  "content": "코드 수정 후 재검증 (Verify Loop)",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "uoxfH",
+          "name": "footer",
+          "fill": "#4B5563",
+          "content": "Playwright CLI: npx playwright screenshot --browser chromium",
+          "fontFamily": "Inter",
+          "fontSize": 11,
+          "fontWeight": "normal"
         }
       ]
     }

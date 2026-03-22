@@ -1,1 +1,4 @@
 /.idea
+
+# Playwright TC screenshots
+**/tc/*.png

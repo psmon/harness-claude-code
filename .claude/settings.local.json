@@ -8,7 +8,8 @@
       "WebSearch",
       "mcp__memorizer__search_graph",
       "Skill(harness-create)",
-      "Bash(ls -1 D:/Code/AI/harness-claude-code/docs/v*.md)"
+      "Bash(ls -1 D:/Code/AI/harness-claude-code/docs/v*.md)",
+      "Bash(npx playwright:*)"
     ]
   }
 }

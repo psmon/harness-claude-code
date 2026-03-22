@@ -29,7 +29,9 @@ stateDiagram-v2
   idle --> prompted: 프롬프트 입력
   prompted --> planning: 플랜 수립
   planning --> building: 구현 시작
-  building --> recording: 결과 기록
+  building --> verifying: Playwright 검증
+  verifying --> building: 검증 실패
+  verifying --> recording: 검증 통과
   recording --> idle: 버전 발행
 ```
 
@@ -39,6 +41,7 @@ stateDiagram-v2
 | prompted | 프롬프트 입력됨 | `prompt/*.md` |
 | planning | 설계 진행 중 | 플랜 파일 |
 | building | 구현 진행 중 | 소스 코드, 설정 |
+| verifying | Playwright 브라우저 검증 | `tc/screenshot-*.png`, 체크리스트 |
 | recording | 여정 기록 중 | `docs/vX.Y.Z.md`, `design/` 갱신 |
 
 ## 디렉토리-계층 매핑
@@ -321,4 +324,39 @@ graph TD
     L1 -.->|PRD 파이프라인| PJ
     L2 -.->|에이전트 실행| PJ
     L3 -.->|워크플로우 관리| PJ
+```
+
+---
+
+## Playwright 검증 워크플로우 (v0.0.5 추가)
+
+> 출처: projects/sample1 Playwright CLI 검증 여정 (2026-03-23)
+
+### 검증 흐름
+
+```mermaid
+flowchart LR
+    B[building<br/>코드 생성] --> SV[로컬 서버<br/>npx serve]
+    SV --> DT[Chromium Desktop<br/>1280x720]
+    SV --> MB[Chromium Mobile<br/>375x812]
+    DT --> CHK{스크린샷<br/>검증}
+    MB --> CHK
+    CHK -->|PASS| R[recording<br/>하네스 기록]
+    CHK -->|FAIL| B
+```
+
+### Journey 상태 전이 (verifying 추가)
+
+```mermaid
+stateDiagram-v2
+    [*] --> idle
+    idle --> prompted: PRD 확인
+    prompted --> planning: 디자인 + 검색
+    planning --> building: 코드 생성
+    building --> verifying: Playwright 검증
+    verifying --> building: FAIL → 수정
+    verifying --> recording: PASS
+    recording --> idle: 완료
+
+    note right of verifying: Chromium Desktop + Mobile
 ```

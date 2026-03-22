@@ -94,6 +94,12 @@ harness-claude-code/
 | v0.0.2 | 2026-03-22 | revfactory 하네스 학습 & 레이아웃 보강 |
 | v0.0.3 | 2026-03-22 | Agentic Loop 통합 & 첫 에이전트 3종 정의 |
 | v0.0.4 | 2026-03-23 | 프로젝트 생성 워크플로우 & 첫 프로젝트 (sample1) |
+| v0.0.5 | 2026-03-23 | Playwright 검증 워크플로우 & Journey verifying 상태 추가 |
+
+
+## Goal
+- https://github.com/psmon/memorizer-v1
+  - 하네스 기법을 함께 완성시키면서 메모라이저2 생성 : 개인용이 아닌 팀슈트 메모리로 업그레이드
 
 ## 라이선스 & 고지
 

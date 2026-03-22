@@ -81,3 +81,47 @@
 - templates/에 프로젝트 스캐폴딩 템플릿 추가
 - harness.config.json에 projects 경로 등록
 - knowledge/에 `project-creation.md` 스킬 추가 (PRD → 디자인 → 코드 파이프라인)
+
+---
+
+## Playwright CLI 검증 (2026-03-23 추가)
+
+### 검증 환경
+- **도구**: Playwright CLI 1.58.2
+- **브라우저**: Chromium, Firefox
+- **뷰포트**: Desktop (1280x720), Mobile (375x812)
+
+### 발견된 이슈
+
+| # | 이슈 | 심각도 | 브라우저 |
+|---|------|--------|---------|
+| 1 | Firefox에서 텍스트 전체 미렌더링 | Critical | Firefox |
+| 2 | 모바일 반응형 레이아웃 미지원 | Major | Chromium Mobile |
+
+### 관찰사항
+- **정적 분석의 한계**: 이전 체크리스트(v0.0.4)에서 PASS였던 "브라우저 렌더링"이 실제 Playwright 검증에서 FAIL로 변경됨
+- **Playwright CLI 가치**: `npx playwright screenshot` 명령만으로 크로스브라우저 검증 가능 — 하네스 검증 워크플로우에 통합 권장
+- **반응형 미고려**: 코드 생성 시 모바일 뷰포트를 고려한 Tailwind 반응형 클래스 적용이 누락됨
+
+### 하네스 개선 제안 (Playwright 기반)
+1. **engine/ 워크플로우에 Playwright 검증 단계 추가**: `building` → `verifying(playwright)` → `recording` 상태 전이
+2. **knowledge/에 반응형 디자인 가이드 추가**: 프로젝트 생성 시 모바일 뷰포트 기본 고려
+3. **tc/ 검증에 스크린샷 자동 첨부**: Playwright 스크린샷을 체크리스트에 연결
+
+---
+
+## 하네스 평가 점수
+
+| 평가 축 | 점수 | 비고 |
+|---------|------|------|
+| knowledge/ 활용도 | 20/20 | memorizer PRD + Pencil 가이드라인 + WebSearch 모두 활용 |
+| agents/ 역할 분리 | 20/20 | architect, memory-curator, journey-recorder 3종 명확 구분 |
+| engine/ 워크플로우 | 15/20 | Journey 4상태 전이 준수, 단 Playwright 검증 단계 미포함 |
+| Agentic Loop 적용 | 15/20 | Gather→Action→Verify 구조 적용, 단 Verify에서 정적 분석만 수행 (실제 브라우저 검증 누락) |
+| 개선 피드백 품질 | 18/20 | 구체적 관찰 + 실행 가능 제안 포함, harness-create 연계 가능 |
+| **총점** | **88/100** | **등급: A** |
+
+### 점수 해석
+- 등급 A (80-100): 하네스 활용 우수
+- **감점 요인**: engine/ 워크플로우에 실제 브라우저 검증(Playwright)이 포함되지 않아 정적 분석만으로 PASS 판정 → 실제 크로스브라우저 이슈 미발견
+- **권장 액션**: `/harness-create`로 engine/에 Playwright 검증 단계를 워크플로우에 추가
