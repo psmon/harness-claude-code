@@ -23,10 +23,13 @@
 이 프로젝트는 아래 오픈소스들의 아키텍처와 설계 철학을 참고합니다.
 각 프로젝트의 라이선스를 존중하며, 직접적인 코드 복제가 아닌 **구조와 개념의 학습 및 재해석**을 목적으로 합니다.
 
-| 프로젝트 | 참고 내용 | 라이선스 |
-|----------|-----------|----------|
-| [bkit-claude-code](https://github.com/popup-studio-ai/bkit-claude-code) | Context Engineering 3계층 아키텍처, PDCA 방법론, Hook 시스템, Agent/Skill 구조 | Apache 2.0 |
-| [revfactory](https://github.com/revfactory) 하네스 설계 | 도메인 분석 기반 6-Phase 워크플로우, Agent Team & Skill Architect, 오케스트레이터 패턴, Two Execution Modes | - |
+| 프로젝트                                                                    | 참고 내용                                                                                  | 라이선스 |
+|-------------------------------------------------------------------------|----------------------------------------------------------------------------------------|----------|
+| [moemorizer](https://github.com/psmon/memorizer-v1)                     | 셀프구축가능 자체제작 메모라이저 활용                                                                   | Apache 2.0 |
+| [bkit-claude-code](https://github.com/popup-studio-ai/bkit-claude-code) | Context Engineering 3계층 아키텍처, PDCA 방법론, Hook 시스템, Agent/Skill 구조                       | Apache 2.0 |
+| [revfactory](https://github.com/revfactory) 하네스 설계                      | 도메인 분석 기반 6-Phase 워크플로우, Agent Team & Skill Architect, 오케스트레이터 패턴, Two Execution Modes | - |
+
+
 
 > 향후 학습하는 하네스 오픈소스가 추가되면 이 테이블을 갱신합니다.
 
