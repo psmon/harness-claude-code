@@ -125,3 +125,54 @@
 - 등급 A (80-100): 하네스 활용 우수
 - **감점 요인**: engine/ 워크플로우에 실제 브라우저 검증(Playwright)이 포함되지 않아 정적 분석만으로 PASS 판정 → 실제 크로스브라우저 이슈 미발견
 - **권장 액션**: `/harness-create`로 engine/에 Playwright 검증 단계를 워크플로우에 추가
+
+---
+
+## 모바일 반응형 수정 (2026-03-23 추가)
+
+### 수정 배경
+v0.0.5에서 engine/에 Playwright 검증 워크플로우가 추가된 후, 첫 Verify Loop 실전 적용.
+1차 검증(FAIL) → 코드 수정 → 2차 검증(PASS)으로 완전한 루프 순환.
+
+### 수정 내역
+
+| 컴포넌트 | 수정 전 | 수정 후 |
+|---------|---------|---------|
+| Navbar | `px-20`, 링크 항상 표시 | `px-6 md:px-20`, 링크 `hidden md:inline` |
+| HeroSection | `flex` (가로 고정), 500px 이미지 | `flex-col md:flex-row`, 280px/500px 반응형 |
+| FeaturesSection | `flex` (가로 고정) | `flex-col md:flex-row` 세로 스택 |
+| Footer | `flex` (가로 고정) | `flex-col md:flex-row` + gap |
+| 타이포그래피 | 64px/42px 고정 | `text-[36px] md:text-[64px]` 반응형 |
+
+### 3계층 활용 (수정 작업)
+
+| 계층 | 활용 내용 |
+|------|----------|
+| engine/ | `playwright-verification.md` Verify Loop 패턴 최초 실전 적용 |
+| engine/ | `project-creation-workflow.md` Phase D(verifying) 단계 실행 |
+| agents/ | architect: 반응형 코드 수정 / journey-recorder: 체크리스트 기록 |
+
+### Playwright 검증 결과
+
+| 뷰포트 | 1차 검증 | 수정 후 2차 검증 |
+|--------|---------|-----------------|
+| Desktop (1280x720) | PASS | PASS |
+| Mobile (375x812) | FAIL | **PASS** |
+
+---
+
+## 하네스 평가 점수 (수정 후 재평가)
+
+| 평가 축 | 점수 | 비고 |
+|---------|------|------|
+| knowledge/ 활용도 | 20/20 | 이전 활용 유지 |
+| agents/ 역할 분리 | 20/20 | architect(수정) + journey-recorder(기록) 역할 분리 |
+| engine/ 워크플로우 | 20/20 | v0.0.5 verifying 상태 + Verify Loop 실전 적용 완료 |
+| Agentic Loop 적용 | 20/20 | FAIL → building 복귀 → 수정 → PASS, 완전한 루프 순환 |
+| 개선 피드백 품질 | 18/20 | 구체적 수정 내역 + Verify Loop 패턴 검증 사례 기록 |
+| **총점** | **98/100** | **등급: A** |
+
+### 점수 변화
+- **이전**: 88/100 (engine 15, Agentic Loop 15)
+- **현재**: 98/100 (engine 20, Agentic Loop 20)
+- **개선 요인**: Playwright 검증 단계가 engine/에 추가(v0.0.5)되고, 실제 Verify Loop가 작동하여 이슈를 발견→수정→재검증하는 완전한 순환이 증명됨
