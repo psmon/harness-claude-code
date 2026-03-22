@@ -28,8 +28,8 @@ allowed-tools:
 
 ## 현재 하네스 상태
 
-- 설정: !`cat harness.config.json`
-- 최신 버전 기록: !`ls -1 docs/v*.md | sort -V | tail -1 | xargs head -20`
+- 설정: harness.config.json을 Read 도구로 읽기
+- 최신 버전 기록: Glob으로 `docs/v*.md` 검색 후 최신 파일을 Read 도구로 읽기
 - 최근 변경: !`git log --oneline -5`
 
 ---
