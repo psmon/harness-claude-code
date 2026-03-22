@@ -1,6 +1,8 @@
 # harness-claude-code
 
-> 다양한 하네스 오픈소스를 학습하고, 메모리 MCP 지식 + Pencil MCP 시각화로 나만의 Claude Code 하네스를 조립해 나가는 프로젝트
+![하네서 디벨롭 컨셉](/design/concept.png)
+
+> 다양한 하네스 오픈소스를 개념을 학습하고, 메모리 MCP 지식 + Pencil MCP 시각화로 나만의 Claude Code 하네스를 조립해 나가는 프로젝트 Pencial의 블루프린트로부터 시작해 완성해 나가는 여정을 공유합니다.
 
 ## 이 프로젝트는
 
