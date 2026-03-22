@@ -89,3 +89,80 @@ sequenceDiagram
   H->>H: docs/ 여정 기록
   H-->>U: 결과 + 버전 발행
 ```
+
+---
+
+## revfactory 하네스: Agent Team & Skill Architect (v0.0.2 추가)
+
+> 출처: [revfactory](https://github.com/revfactory) — 도메인 분석 기반 하네스 설계
+
+### 6-Phase 워크플로우
+
+도메인 분석에서 출발하여 검증/배포까지 이르는 6단계 구조가 핵심입니다.
+
+```mermaid
+graph LR
+  P1[1. 도메인 분석<br/>Domain Analysis] --> P2[2. 팀 디자인<br/>Team Design]
+  P2 --> P3[3. 에이전트 정의<br/>Agent Definition]
+  P3 --> P4[4. 스킬 설계<br/>Skill Design]
+  P4 --> P5[5. 워크플로우<br/>Workflow Setup]
+  P5 --> P6[6. 검증 & 배포<br/>Verify & Deploy]
+```
+
+| Phase | 설명 | harness 대응 |
+|-------|------|-------------|
+| 1. 도메인 분석 | 문제 영역을 먼저 분석 | `knowledge/` 메모리 기반 도메인 탐색 |
+| 2. 팀 디자인 | 에이전트 팀 구성 설계 | `agents/` 팀 구조 정의 |
+| 3. 에이전트 정의 | 개별 에이전트 역할/능력 | `agents/` 에이전트 스펙 |
+| 4. 스킬 설계 | 에이전트별 스킬 부여 | `knowledge/` 스킬 매핑 |
+| 5. 워크플로우 | 실행 흐름 구성 | `engine/` 워크플로우 정의 |
+| 6. 검증 & 배포 | 결과 검증 및 배포 | `engine/` 검증 게이트 |
+
+### Core Components
+
+```mermaid
+graph TD
+  ORCH[오케스트레이터<br/>Orchestrator] --> AA[에이전트 A]
+  ORCH --> AB[에이전트 B]
+  ORCH --> AC[에이전트 C]
+  AA --> S1[스킬 1]
+  AA --> S2[스킬 2]
+  AB --> S3[스킬 3]
+  AC --> SN[스킬 N]
+  ORCH -.->|SharedMemory| SM[(공유 메모리)]
+  ORCH -.->|ContextWindow| CW[(컨텍스트)]
+```
+
+### Two Execution Modes
+
+```mermaid
+graph LR
+  subgraph "에이전트 팀 모드 (기본)"
+    SM1[SpawnManager] --> A1[Agent A]
+    SM1 --> A2[Agent B]
+    TC1[TaskCreate] --> A1
+    TC1 --> A2
+  end
+  subgraph "시니어 에이전트 모드 (메인)"
+    MA[Main Agent] --> SA1[Agent A]
+    MA --> SA2[Agent B]
+    MA --> SA3[Agent C]
+    GC[글로벌 컨텍스트] -.-> MA
+  end
+```
+
+| 모드 | 특징 | 통신 방식 |
+|------|------|-----------|
+| 에이전트 팀 | SpawnManager가 Agent 생성, TaskCreate로 작업 배분 | TaskCreate/Update |
+| 시니어 에이전트 | 메인 Agent가 전체 조율, 글로벌 컨텍스트 공유 | SendMessage (실시간) |
+
+### Architecture Patterns & Data Protocols
+
+**패턴**: Chain · Verify · Parallel · Workflow
+
+**프로토콜**:
+| 프로토콜 | 용도 |
+|----------|------|
+| SendMessage | 실시간 에이전트 간 통신 |
+| TaskCreate/Update | 작업 추적 |
+| 파일 기록 | Workspace/Artifacts 영속화 |

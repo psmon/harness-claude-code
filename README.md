@@ -24,6 +24,7 @@
 | 프로젝트 | 참고 내용 | 라이선스 |
 |----------|-----------|----------|
 | [bkit-claude-code](https://github.com/popup-studio-ai/bkit-claude-code) | Context Engineering 3계층 아키텍처, PDCA 방법론, Hook 시스템, Agent/Skill 구조 | Apache 2.0 |
+| [revfactory](https://github.com/revfactory) 하네스 설계 | 도메인 분석 기반 6-Phase 워크플로우, Agent Team & Skill Architect, 오케스트레이터 패턴, Two Execution Modes | - |
 
 > 향후 학습하는 하네스 오픈소스가 추가되면 이 테이블을 갱신합니다.
 
@@ -84,6 +85,7 @@ harness-claude-code/
 | 버전 | 날짜 | 설명 |
 |------|------|------|
 | v0.0.1 | 2026-03-22 | 초기 디렉토리 구조 설계 |
+| v0.0.2 | 2026-03-22 | revfactory 하네스 학습 & 레이아웃 보강 |
 
 ## 라이선스 & 고지
 
