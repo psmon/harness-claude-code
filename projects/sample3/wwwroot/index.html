@@ -3,103 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PingPong Actor Visualizer</title>
+    <title>pingpong_visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
-        .header { padding: 24px 32px; border-bottom: 1px solid #222; }
-        .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
-        .header p { font-size: 13px; color: #888; margin-top: 4px; }
-        .controls { display: flex; gap: 12px; align-items: center; padding: 16px 32px; border-bottom: 1px solid #1a1a1a; }
-        .controls label { font-size: 13px; color: #999; }
-        .controls input[type="number"] {
-            width: 80px; padding: 6px 10px; background: #1a1a1a; border: 1px solid #333;
-            border-radius: 6px; color: #fff; font-size: 14px; outline: none;
+        :root {
+            --bg: #0A0A0A;
+            --surface: #0F0F0F;
+            --border: #2a2a2a;
+            --text-primary: #FAFAFA;
+            --text-secondary: #6B7280;
+            --text-tertiary: #4B5563;
+            --green: #10B981;
+            --blue: #4a9eff;
+            --amber: #F59E0B;
+            --cyan: #06B6D4;
+            --rose: #f43f5e;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'IBM Plex Mono', monospace;
         }
-        .controls input:focus { border-color: #4a9eff; }
-        .btn {
-            padding: 7px 18px; border: none; border-radius: 6px; font-size: 13px;
-            font-weight: 600; cursor: pointer; transition: all 0.15s;
+        body {
+            font-family: var(--font-mono);
+            background: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        .btn-primary { background: #4a9eff; color: #fff; }
-        .btn-primary:hover { background: #3a8eef; }
-        .btn-primary:disabled { background: #333; color: #666; cursor: not-allowed; }
-        .status { font-size: 12px; color: #666; margin-left: auto; }
-        .status.running { color: #4a9eff; }
-        .status.done { color: #4ade80; }
 
-        .diagram-container { padding: 32px; overflow-x: auto; }
-        .sequence-diagram { min-width: 500px; }
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 40px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-logo .prompt {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--green);
+        }
+        .header-logo .title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        .header-subtitle {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-tertiary);
+        }
+        .status-dot.online { background: var(--green); }
+        .status-dot.running { background: var(--blue); animation: pulse 1s infinite; }
+        .header-status span {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .header-status.active span { color: var(--green); }
+        .header-status.active .status-dot { background: var(--green); }
+        .header-status.running span { color: var(--blue); }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            align-items: center;
+            padding: 16px 40px;
+            gap: 16px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        .cmd-prefix {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--green);
+        }
+        .controls label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .controls input[type="number"] {
+            width: 80px;
+            padding: 8px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            outline: none;
+        }
+        .controls input:focus { border-color: var(--green); }
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 0;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+        .btn-primary {
+            background: var(--green);
+            color: var(--bg);
+        }
+        .btn-primary:hover { opacity: 0.85; }
+        .btn-primary:disabled {
+            background: var(--border);
+            color: var(--text-tertiary);
+            cursor: not-allowed;
+        }
+        .status-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-left: auto;
+        }
+        .status-text.running { color: var(--blue); }
+        .status-text.done { color: var(--green); }
+        .status-text.error { color: var(--rose); }
+
+        /* Diagram */
+        .diagram-container {
+            flex: 1;
+            padding: 40px;
+            overflow-x: auto;
+        }
+        .sequence-diagram { min-width: 400px; }
 
         /* Actor Lifelines */
-        .actors { display: flex; justify-content: space-around; position: relative; }
-        .actor-box {
-            text-align: center; padding: 10px 24px; background: #1a1a1a;
-            border: 1px solid #333; border-radius: 8px; font-size: 13px;
-            font-weight: 600; position: relative; z-index: 2;
+        .actors {
+            display: flex;
+            gap: 24px;
         }
-        .actor-box.api { border-color: #4a9eff; color: #4a9eff; }
-        .actor-box.ping { border-color: #f59e0b; color: #f59e0b; }
-        .actor-box.pong { border-color: #10b981; color: #10b981; }
+        .actor-box {
+            flex: 1;
+            text-align: center;
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            text-transform: lowercase;
+        }
+        .actor-box.api { border-color: var(--blue); color: var(--blue); }
+        .actor-box.ping { border-color: var(--amber); color: var(--amber); }
+        .actor-box.pong { border-color: var(--green); color: var(--green); }
 
         .lifelines { position: relative; margin-top: 0; }
         .lifeline-bg {
             position: absolute; top: 0; bottom: 0;
-            width: 2px; background: #222;
+            width: 1px;
+            background: var(--border);
         }
 
         /* Messages */
         .messages { position: relative; padding-top: 12px; }
         .msg-row {
-            display: flex; align-items: center; height: 40px; position: relative;
-            opacity: 0; animation: fadeIn 0.3s ease forwards;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.3s ease forwards;
         }
         @keyframes fadeIn { to { opacity: 1; } }
         .msg-arrow {
-            position: absolute; height: 2px; top: 50%;
+            position: absolute;
+            height: 2px;
+            top: 50%;
         }
-        .msg-arrow.right { background: linear-gradient(90deg, #4a9eff, #4a9eff); }
-        .msg-arrow.left { background: linear-gradient(90deg, #10b981, #10b981); }
+        .msg-arrow.right { background: var(--blue); }
+        .msg-arrow.left { background: var(--green); }
         .msg-arrow::after {
-            content: ''; position: absolute; top: -4px; width: 0; height: 0;
-            border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+            content: '';
+            position: absolute;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
         }
-        .msg-arrow.right::after { right: -1px; border-left: 8px solid #4a9eff; }
-        .msg-arrow.left::after { left: -1px; border-right: 8px solid #10b981; }
+        .msg-arrow.right::after { right: -1px; border-left: 8px solid var(--blue); }
+        .msg-arrow.left::after { left: -1px; border-right: 8px solid var(--green); }
         .msg-label {
-            position: absolute; top: -16px; font-size: 11px; font-weight: 600;
-            padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+            position: absolute;
+            top: -16px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            white-space: nowrap;
+            text-transform: lowercase;
         }
-        .msg-label.right { background: rgba(74,158,255,0.15); color: #4a9eff; }
-        .msg-label.left { background: rgba(16,185,129,0.15); color: #10b981; }
-        .msg-label.api-msg { background: rgba(244,63,94,0.15); color: #f43f5e; }
+        .msg-label.right { background: rgba(74,158,255,0.15); color: var(--blue); }
+        .msg-label.left { background: rgba(16,185,129,0.15); color: var(--green); }
+        .msg-label.api-msg { background: rgba(244,63,94,0.15); color: var(--rose); }
 
         .round-marker {
-            position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-            font-size: 10px; color: #555; font-weight: 600; width: 50px; text-align: right;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            width: 40px;
+            text-align: right;
+            text-transform: lowercase;
         }
 
         /* Summary */
         .summary {
-            margin: 24px 32px; padding: 16px 20px; background: #111; border: 1px solid #222;
-            border-radius: 8px; font-size: 13px;
+            display: flex;
+            align-items: center;
+            padding: 16px 40px;
+            gap: 32px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
         }
-        .summary h3 { font-size: 14px; margin-bottom: 8px; color: #999; }
-        .summary .stat { display: inline-block; margin-right: 24px; }
-        .summary .stat-value { color: #4ade80; font-weight: 700; }
+        .summary-title {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .stat {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+        .stat-label { color: var(--text-secondary); }
+        .stat-value { color: var(--green); font-weight: 700; }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header { padding: 16px 20px; }
+            .header-subtitle { display: none; }
+            .controls { padding: 12px 20px; gap: 10px; }
+            .diagram-container { padding: 20px; }
+            .summary { padding: 12px 20px; gap: 16px; }
+            .actors { gap: 8px; }
+            .actor-box { padding: 8px 12px; font-size: 11px; }
+            .sequence-diagram { min-width: 320px; }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>PingPong Actor Visualizer</h1>
-        <p>Akka.NET Actor 메시지 교환을 실시간 시퀀스 다이어그램으로 시각화</p>
+        <div class="header-logo">
+            <span class="prompt">&gt;</span>
+            <span class="title">pingpong_visualizer</span>
+        </div>
+        <span class="header-subtitle">// akka.net actor message sequence diagram</span>
+        <div class="header-status active" id="headerStatus">
+            <div class="status-dot online"></div>
+            <span>[ready]</span>
+        </div>
     </div>
 
     <div class="controls">
-        <label for="rounds">Rounds:</label>
-        <input type="number" id="rounds" value="5" min="1" max="50">
-        <button class="btn btn-primary" id="startBtn" onclick="runPingPong()">Run PingPong</button>
-        <span class="status" id="status">Ready</span>
+        <span class="cmd-prefix">$</span>
+        <label for="rounds">rounds:</label>
+        <input type="number" id="rounds" value="5" min="1" max="100">
+        <button class="btn btn-primary" id="startBtn" onclick="runPingPong()">run_pingpong</button>
+        <span class="status-text" id="status">[ready]</span>
     </div>
 
     <div class="diagram-container">
@@ -107,13 +300,23 @@
     </div>
 
     <div class="summary" id="summary" style="display:none">
-        <h3>Result</h3>
+        <span class="summary-title">// result</span>
         <div id="summaryContent"></div>
     </div>
 
     <script>
         const ACTOR_POSITIONS = { 'API': 0, 'PingActor': 1, 'PongActor': 2 };
+        const ACTOR_LABELS = { 'API': 'api', 'PingActor': 'ping_actor', 'PongActor': 'pong_actor' };
         const ACTOR_COUNT = 3;
+
+        function updateHeaderStatus(state, text) {
+            const hs = document.getElementById('headerStatus');
+            const dot = hs.querySelector('.status-dot');
+            const label = hs.querySelector('span');
+            hs.className = 'header-status ' + state;
+            dot.className = 'status-dot ' + (state === 'active' ? 'online' : state === 'running' ? 'running' : '');
+            label.textContent = text;
+        }
 
         async function runPingPong() {
             const rounds = parseInt(document.getElementById('rounds').value) || 5;
@@ -123,8 +326,9 @@
             const summary = document.getElementById('summary');
 
             btn.disabled = true;
-            status.textContent = 'Running...';
-            status.className = 'status running';
+            status.textContent = '[running...]';
+            status.className = 'status-text running';
+            updateHeaderStatus('running', '[executing]');
             summary.style.display = 'none';
             diagram.innerHTML = '';
 
@@ -134,17 +338,19 @@
 
                 renderDiagram(data.events);
 
-                summary.style.display = 'block';
+                summary.style.display = 'flex';
                 document.getElementById('summaryContent').innerHTML =
-                    `<span class="stat">Rounds: <span class="stat-value">${data.totalRounds}</span></span>` +
-                    `<span class="stat">Messages: <span class="stat-value">${data.events.length}</span></span>` +
-                    `<span class="stat">Status: <span class="stat-value">${data.summary}</span></span>`;
+                    `<span class="stat"><span class="stat-label">rounds:</span> <span class="stat-value">${data.totalRounds}</span></span>` +
+                    `<span class="stat"><span class="stat-label">messages:</span> <span class="stat-value">${data.events.length}</span></span>` +
+                    `<span class="stat"><span class="stat-label">status:</span> <span class="stat-value">[${data.summary.toLowerCase()}]</span></span>`;
 
-                status.textContent = 'Done';
-                status.className = 'status done';
+                status.textContent = '[done]';
+                status.className = 'status-text done';
+                updateHeaderStatus('active', '[completed]');
             } catch (err) {
-                status.textContent = 'Error: ' + err.message;
-                status.className = 'status';
+                status.textContent = '[error: ' + err.message + ']';
+                status.className = 'status-text error';
+                updateHeaderStatus('', '[error]');
             } finally {
                 btn.disabled = false;
             }
@@ -152,22 +358,21 @@
 
         function renderDiagram(events) {
             const diagram = document.getElementById('diagram');
-            const containerWidth = diagram.parentElement.clientWidth - 64;
+            const containerWidth = diagram.parentElement.clientWidth - 80;
             const colWidth = containerWidth / ACTOR_COUNT;
-            const marginLeft = 60;
+            const marginLeft = 48;
 
             // Actor boxes
             let actorsHtml = '<div class="actors" style="padding-left:' + marginLeft + 'px">';
             for (const [name, idx] of Object.entries(ACTOR_POSITIONS)) {
                 const cls = name === 'API' ? 'api' : name === 'PingActor' ? 'ping' : 'pong';
-                actorsHtml += `<div class="actor-box ${cls}" style="width:${colWidth}px">${name}</div>`;
+                actorsHtml += `<div class="actor-box ${cls}">${ACTOR_LABELS[name]}</div>`;
             }
             actorsHtml += '</div>';
 
             // Lifelines + Messages
             let msgsHtml = `<div class="lifelines" style="height:${events.length * 40 + 20}px; padding-left:${marginLeft}px">`;
 
-            // Lifeline vertical lines
             for (let i = 0; i < ACTOR_COUNT; i++) {
                 const x = colWidth * i + colWidth / 2;
                 msgsHtml += `<div class="lifeline-bg" style="left:${x}px"></div>`;
@@ -183,14 +388,14 @@
                 const width = Math.abs(toIdx - fromIdx) * colWidth;
                 const dir = isRight ? 'right' : 'left';
                 const labelClass = evt.from === 'API' || evt.to === 'API' ? 'api-msg' : dir;
-                const labelLeft = left + width / 2;
+                const msgName = evt.message.toLowerCase().replace(/\(/g, '(').replace(/\)/g, ')');
 
                 msgsHtml += `<div class="msg-row" style="animation-delay:${i * 0.08}s">`;
                 if (evt.round > 0) {
-                    msgsHtml += `<div class="round-marker">R${evt.round}</div>`;
+                    msgsHtml += `<div class="round-marker">r${evt.round}</div>`;
                 }
                 msgsHtml += `<div class="msg-arrow ${dir}" style="left:${left}px; width:${width}px">`;
-                msgsHtml += `<span class="msg-label ${labelClass}" style="left:50%; transform:translateX(-50%)">${evt.message}</span>`;
+                msgsHtml += `<span class="msg-label ${labelClass}" style="left:50%; transform:translateX(-50%)">${msgName}</span>`;
                 msgsHtml += `</div></div>`;
             });
 

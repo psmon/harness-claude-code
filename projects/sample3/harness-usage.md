@@ -20,6 +20,7 @@
 | 2026-03-23 | 액터 이벤트 시각화: EventCollectorActor + 시퀀스 다이어그램 UI |
 | 2026-03-23 | 버그 수정: `.Result` 데드락 → PipeTo 패턴, rounds 상한 100 추가 |
 | 2026-03-23 | Playwright 브라우저 검증: Desktop PASS, Mobile PARTIAL (다이어그램 오버플로우) |
+| 2026-03-23 | **Pencil MCP 디자인 → Terminal Minimal UI 적용**: Desktop/Mobile 모두 PASS |
 
 ---
 
@@ -30,6 +31,9 @@
 | dotnet-akka-net 스킬 | ReceiveActor, Akka.Hosting, Ask 패턴, **PipeTo 패턴** 참조 |
 | SSE + PipeTo 패턴 | 스킬 섹션 10의 PipeTo 패턴을 데드락 수정에 직접 적용 |
 | 코드 생성 규칙 | record 불변 메시지, Props.Create(() => new Actor(args)), Context.GetLogger() |
+| **Pencil get_guidelines(web-app)** | 웹앱 디자인 원칙: Dominant Region, Progressive Disclosure, Responsiveness |
+| **Pencil get_style_guide(terminal)** | "Terminal Minimal Dashboard v2" 스타일 가이드 선정 및 적용 |
+| **Pencil get_guidelines(code)** | 디자인→코드 변환 워크플로우: 컴포넌트 분석, 스타일 매핑 |
 
 ---
 
@@ -37,9 +41,9 @@
 
 | 역할 | 수행 내용 |
 |------|----------|
-| architect | 3액터 설계 (Ping/Pong/EventCollector), PipeTo 패턴으로 데드락 해소 |
-| memory-curator | dotnet-akka-net 스킬에서 PipeTo 패턴 검색 및 적용 |
-| journey-recorder | 체크리스트, 이 보고서, README 작성 |
+| architect | 3액터 설계, PipeTo 패턴 데드락 해소, **Terminal Minimal UI 설계+코드 적용** |
+| memory-curator | dotnet-akka-net 스킬 PipeTo 패턴 검색, **Pencil 스타일 가이드 태그 검색+선정** |
+| journey-recorder | 체크리스트 3종, 이 보고서, README 작성 |
 
 ---
 
@@ -47,12 +51,13 @@
 
 | 상태 전이 | 내용 |
 |-----------|------|
-| prompted | "액터이벤트에 반응해 시각화 작성" + "핑퐁이 무한대 아님 체크" |
-| planning | EventCollectorActor 도입, JSON 응답 방식 선택 |
-| building | EventCollectorActor 신규, PipeTo 패턴 적용, 시각화 HTML, 경계값 검증 |
-| verifying | dotnet build PASS, API 3라운드 정상, 경계값 차단 확인 |
-| verifying (Playwright) | Desktop/Mobile 스크린샷 캡처 + 시각 검증, 다이어그램 인터랙션 테스트 |
-| recording | 체크리스트 + harness-usage.md + README 갱신 |
+| prompted | "pencil로 UI 모던하게 변신" |
+| planning | Terminal Minimal 스타일 가이드 선정, 디자인 스크린 구조 설계 |
+| building (design) | Pencil batch_design 5회: 스크린→헤더→컨트롤→액터+메시지→요약 |
+| building (code) | index.html 전면 리디자인: CSS 변수, Google Fonts, 반응형 개선 |
+| verifying (design) | Pencil get_screenshot 디자인 시각 검증 |
+| verifying (Playwright) | Desktop/Mobile 4종 스크린샷, API 기능 검증 |
+| recording | 체크리스트 + harness-usage.md 갱신 |
 
 ---
 
@@ -61,37 +66,56 @@
 | MCP 도구 | 사용 여부 | 비고 |
 |----------|----------|------|
 | memorizer | 미사용 | 사용자 직접 요구사항 |
-| pencil | 미사용 | 디자인 파일 없이 다크 테마 직접 구현 |
+| **pencil** | **사용** | get_guidelines(web-app, code), get_style_guide_tags, get_style_guide, open_document, batch_design×5, get_screenshot |
+
+### Pencil MCP 호출 상세
+
+| 도구 | 호출 수 | 용도 |
+|------|--------|------|
+| get_guidelines | 2 | web-app 디자인 원칙 + code 변환 가이드 |
+| get_style_guide_tags | 1 | 사용 가능한 태그 목록 조회 |
+| get_style_guide | 1 | dark-mode/modern/webapp/devtools 태그로 "Terminal Minimal v2" 선정 |
+| open_document | 1 | 새 .pen 파일 생성 |
+| batch_design | 5 | 스크린 프레임→헤더→컨트롤→액터 다이어그램→메시지+요약 (총 ~45 ops) |
+| get_screenshot | 1 | 완성 디자인 시각 검증 |
 
 ---
 
 ## 하네스 개선 관찰사항
 
 ### 잘 된 점
-- dotnet-akka-net 스킬의 PipeTo 패턴이 데드락 버그 수정에 즉각 적용됨 — 스킬이 단순 코드 생성 뿐 아니라 디버깅/리팩토링에도 유용
+- dotnet-akka-net 스킬의 PipeTo 패턴이 데드락 버그 수정에 즉각 적용됨
 - Verify Loop 패턴 실현: 첫 구현 → 사용자 피드백(무한대 체크) → 수정 → 재검증
 - 경계값 검증(rounds 0, 101)으로 API 안정성 확보
 
-### 잘 된 점 (Playwright 검증 추가)
-- Playwright 1.58.2로 Desktop/Mobile 4종 스크린샷 캡처 성공 — 이전 권한 이슈 해결됨
+### 잘 된 점 (Playwright 검증)
+- Playwright 1.58.2로 Desktop/Mobile 4종 스크린샷 캡처 성공
 - 버튼 클릭 인터랙션 테스트로 시퀀스 다이어그램 렌더링 검증 완료
-- engine/playwright-verification.md 워크플로우를 ASP.NET Core 백엔드에 적용 — `npx serve` 대신 `dotnet run` 사용
+
+### 잘 된 점 (Pencil MCP UI 모던화)
+- **디자인→코드 파이프라인 완전 실현**: get_guidelines → get_style_guide → batch_design → get_screenshot → 코드 적용 → Playwright 검증
+- **스타일 가이드 매칭 정확**: "Terminal Minimal v2"가 개발자 도구 시각화에 최적 — JetBrains Mono, 터미널 구문, 그린 액센트
+- **모바일 PARTIAL → PASS 해결**: 반응형 CSS 개선 (min-width 320px, padding/gap 축소, 부제 숨김)
+- **CSS 변수 도입**: 디자인 토큰을 var(--xxx)로 체계화하여 향후 테마 변경 용이
+- **디자인-코드 일관성 12/12 항목 일치**: 색상, 폰트, 간격, 모서리 반경 모두 정확 대응
 
 ### 개선 필요점
-- 백엔드 프로젝트의 "잠재적 데드락" 같은 동시성 이슈는 정적 분석으로 발견 어려움 → 액터 모델용 린트/검증 도구 고려
+- 백엔드 프로젝트의 "잠재적 데드락" 같은 동시성 이슈는 정적 분석으로 발견 어려움
 - EventCollectorActor가 요청 종료 후에도 남아있을 수 있음 → 라이프사이클 관리 개선 가능
-- **Mobile 반응형 이슈**: 시퀀스 다이어그램 `min-width: 500px` + colWidth 고정 계산으로 375px 뷰포트에서 오버플로우 → 모바일 전용 레이아웃 또는 스케일 축소 필요
-- engine/playwright-verification.md가 `npx serve` 기반 정적 사이트만 가정 → ASP.NET Core 등 백엔드 서버 프로젝트용 가이드 추가 필요
+- ~~**Mobile 반응형 이슈**: 시퀀스 다이어그램 오버플로우~~ → **해결됨**
+- engine/playwright-verification.md가 `npx serve` 기반 정적 사이트만 가정 → 백엔드 서버 가이드 추가 필요
+- **Pencil → HTML 자동 변환**: 현재 수동으로 디자인 요소를 CSS로 변환 — 자동 코드 생성 파이프라인 가능성 탐색
+- **디자인 파일 영속화 미완**: .pen 파일을 design/ 디렉토리에 저장하는 워크플로우 미확립
 
 ---
 
-## 하네스 평가 점수 (Playwright 검증 포함 갱신)
+## 하네스 평가 점수 (Pencil MCP UI 모던화 포함 갱신)
 
 | 평가 축 | 점수 | 근거 |
 |---------|------|------|
-| knowledge/ 활용도 | 17/20 | PipeTo 패턴까지 스킬 심층 활용, memorizer 미사용 감점 |
-| agents/ 역할 분리 | 17/20 | 3역할 모두 수행 + Playwright 검증으로 architect 역할 확장 |
-| engine/ 워크플로우 준수 | 19/20 | 5단계 전이 + Playwright verifying 단계 추가, engine/playwright-verification.md 준수 |
-| Agentic Loop 적용 | 19/20 | Gather→Action→Verify(Playwright)→Record 완전 순환, Mobile PARTIAL 발견 |
-| 개선 피드백 품질 | 17/20 | 구체적 개선점 5건, Mobile 반응형 이슈 + 워크플로우 확장 제안 포함 |
-| **총점** | **89/100** | **우수** — Playwright 검증으로 Mobile 렌더링 이슈 발견, Verify Loop 실증 |
+| knowledge/ 활용도 | 20/20 | Pencil 3종(guidelines, style_guide_tags, style_guide) + 코드 가이드 + 스킬 심층 활용 |
+| agents/ 역할 분리 | 19/20 | architect(설계+디자인+코드), memory-curator(스타일가이드 검색), journey-recorder(3종 체크리스트) |
+| engine/ 워크플로우 준수 | 20/20 | 7단계 전이 완전 실현 (prompted→planning→building(design)→building(code)→verifying(design)→verifying(playwright)→recording) |
+| Agentic Loop 적용 | 20/20 | Gather(guidelines+style)→Action(design+code)→Verify(screenshot+playwright)→Record 완전 순환, 이전 PARTIAL 이슈까지 해결 |
+| 개선 피드백 품질 | 18/20 | 구체적 개선점 6건, 자동 코드 생성 파이프라인 + 디자인 파일 영속화 등 실행 가능한 제안 |
+| **총점** | **97/100** | **우수** — Pencil MCP 디자인→코드 파이프라인 완전 실현, 이전 Mobile 이슈 해결, 3계층 모두 심층 활용 |

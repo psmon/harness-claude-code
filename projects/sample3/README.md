@@ -54,7 +54,11 @@ curl http://localhost:5200/api/pingpong/5
 
 ## 시각화
 
-- 다크 테마 시퀀스 다이어그램
+- **Terminal Minimal** 다크 테마 (Pencil MCP 스타일 가이드 기반)
+- JetBrains Mono + IBM Plex Mono 듀얼 모노스페이스 폰트
+- 터미널 구문 UI: `>` 프롬프트, `$` 명령 접두사, `//` 주석, `[brackets]`, snake_case
+- 0px border-radius, #10B981 그린 액센트
 - API → PingActor → PongActor 간 메시지 교환을 화살표로 표시
-- 라운드 번호, 메시지 이름, 방향 컬러 구분
-- 애니메이션 순차 렌더링
+- 라운드 마커, 메시지 라벨, 방향별 컬러 (blue/green/rose)
+- 상태 도트 시스템 (online → executing → completed)
+- 모바일 반응형 지원 (375px까지)
