@@ -9,7 +9,13 @@
       "mcp__memorizer__search_graph",
       "Skill(harness-create)",
       "Bash(ls -1 D:/Code/AI/harness-claude-code/docs/v*.md)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "Bash(dotnet --version)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet add:*)",
+      "Bash(dotnet build:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5200/api/pingpong/0)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5200/api/pingpong/101)"
     ]
   }
 }

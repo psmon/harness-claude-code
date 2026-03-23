@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PingPong Actor Visualizer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+        .header { padding: 24px 32px; border-bottom: 1px solid #222; }
+        .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        .header p { font-size: 13px; color: #888; margin-top: 4px; }
+        .controls { display: flex; gap: 12px; align-items: center; padding: 16px 32px; border-bottom: 1px solid #1a1a1a; }
+        .controls label { font-size: 13px; color: #999; }
+        .controls input[type="number"] {
+            width: 80px; padding: 6px 10px; background: #1a1a1a; border: 1px solid #333;
+            border-radius: 6px; color: #fff; font-size: 14px; outline: none;
+        }
+        .controls input:focus { border-color: #4a9eff; }
+        .btn {
+            padding: 7px 18px; border: none; border-radius: 6px; font-size: 13px;
+            font-weight: 600; cursor: pointer; transition: all 0.15s;
+        }
+        .btn-primary { background: #4a9eff; color: #fff; }
+        .btn-primary:hover { background: #3a8eef; }
+        .btn-primary:disabled { background: #333; color: #666; cursor: not-allowed; }
+        .status { font-size: 12px; color: #666; margin-left: auto; }
+        .status.running { color: #4a9eff; }
+        .status.done { color: #4ade80; }
+
+        .diagram-container { padding: 32px; overflow-x: auto; }
+        .sequence-diagram { min-width: 500px; }
+
+        /* Actor Lifelines */
+        .actors { display: flex; justify-content: space-around; position: relative; }
+        .actor-box {
+            text-align: center; padding: 10px 24px; background: #1a1a1a;
+            border: 1px solid #333; border-radius: 8px; font-size: 13px;
+            font-weight: 600; position: relative; z-index: 2;
+        }
+        .actor-box.api { border-color: #4a9eff; color: #4a9eff; }
+        .actor-box.ping { border-color: #f59e0b; color: #f59e0b; }
+        .actor-box.pong { border-color: #10b981; color: #10b981; }
+
+        .lifelines { position: relative; margin-top: 0; }
+        .lifeline-bg {
+            position: absolute; top: 0; bottom: 0;
+            width: 2px; background: #222;
+        }
+
+        /* Messages */
+        .messages { position: relative; padding-top: 12px; }
+        .msg-row {
+            display: flex; align-items: center; height: 40px; position: relative;
+            opacity: 0; animation: fadeIn 0.3s ease forwards;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .msg-arrow {
+            position: absolute; height: 2px; top: 50%;
+        }
+        .msg-arrow.right { background: linear-gradient(90deg, #4a9eff, #4a9eff); }
+        .msg-arrow.left { background: linear-gradient(90deg, #10b981, #10b981); }
+        .msg-arrow::after {
+            content: ''; position: absolute; top: -4px; width: 0; height: 0;
+            border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+        }
+        .msg-arrow.right::after { right: -1px; border-left: 8px solid #4a9eff; }
+        .msg-arrow.left::after { left: -1px; border-right: 8px solid #10b981; }
+        .msg-label {
+            position: absolute; top: -16px; font-size: 11px; font-weight: 600;
+            padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+        }
+        .msg-label.right { background: rgba(74,158,255,0.15); color: #4a9eff; }
+        .msg-label.left { background: rgba(16,185,129,0.15); color: #10b981; }
+        .msg-label.api-msg { background: rgba(244,63,94,0.15); color: #f43f5e; }
+
+        .round-marker {
+            position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            font-size: 10px; color: #555; font-weight: 600; width: 50px; text-align: right;
+        }
+
+        /* Summary */
+        .summary {
+            margin: 24px 32px; padding: 16px 20px; background: #111; border: 1px solid #222;
+            border-radius: 8px; font-size: 13px;
+        }
+        .summary h3 { font-size: 14px; margin-bottom: 8px; color: #999; }
+        .summary .stat { display: inline-block; margin-right: 24px; }
+        .summary .stat-value { color: #4ade80; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PingPong Actor Visualizer</h1>
+        <p>Akka.NET Actor 메시지 교환을 실시간 시퀀스 다이어그램으로 시각화</p>
+    </div>
+
+    <div class="controls">
+        <label for="rounds">Rounds:</label>
+        <input type="number" id="rounds" value="5" min="1" max="50">
+        <button class="btn btn-primary" id="startBtn" onclick="runPingPong()">Run PingPong</button>
+        <span class="status" id="status">Ready</span>
+    </div>
+
+    <div class="diagram-container">
+        <div class="sequence-diagram" id="diagram"></div>
+    </div>
+
+    <div class="summary" id="summary" style="display:none">
+        <h3>Result</h3>
+        <div id="summaryContent"></div>
+    </div>
+
+    <script>
+        const ACTOR_POSITIONS = { 'API': 0, 'PingActor': 1, 'PongActor': 2 };
+        const ACTOR_COUNT = 3;
+
+        async function runPingPong() {
+            const rounds = parseInt(document.getElementById('rounds').value) || 5;
+            const btn = document.getElementById('startBtn');
+            const status = document.getElementById('status');
+            const diagram = document.getElementById('diagram');
+            const summary = document.getElementById('summary');
+
+            btn.disabled = true;
+            status.textContent = 'Running...';
+            status.className = 'status running';
+            summary.style.display = 'none';
+            diagram.innerHTML = '';
+
+            try {
+                const res = await fetch(`/api/pingpong/${rounds}`);
+                const data = await res.json();
+
+                renderDiagram(data.events);
+
+                summary.style.display = 'block';
+                document.getElementById('summaryContent').innerHTML =
+                    `<span class="stat">Rounds: <span class="stat-value">${data.totalRounds}</span></span>` +
+                    `<span class="stat">Messages: <span class="stat-value">${data.events.length}</span></span>` +
+                    `<span class="stat">Status: <span class="stat-value">${data.summary}</span></span>`;
+
+                status.textContent = 'Done';
+                status.className = 'status done';
+            } catch (err) {
+                status.textContent = 'Error: ' + err.message;
+                status.className = 'status';
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function renderDiagram(events) {
+            const diagram = document.getElementById('diagram');
+            const containerWidth = diagram.parentElement.clientWidth - 64;
+            const colWidth = containerWidth / ACTOR_COUNT;
+            const marginLeft = 60;
+
+            // Actor boxes
+            let actorsHtml = '<div class="actors" style="padding-left:' + marginLeft + 'px">';
+            for (const [name, idx] of Object.entries(ACTOR_POSITIONS)) {
+                const cls = name === 'API' ? 'api' : name === 'PingActor' ? 'ping' : 'pong';
+                actorsHtml += `<div class="actor-box ${cls}" style="width:${colWidth}px">${name}</div>`;
+            }
+            actorsHtml += '</div>';
+
+            // Lifelines + Messages
+            let msgsHtml = `<div class="lifelines" style="height:${events.length * 40 + 20}px; padding-left:${marginLeft}px">`;
+
+            // Lifeline vertical lines
+            for (let i = 0; i < ACTOR_COUNT; i++) {
+                const x = colWidth * i + colWidth / 2;
+                msgsHtml += `<div class="lifeline-bg" style="left:${x}px"></div>`;
+            }
+
+            msgsHtml += '<div class="messages">';
+
+            events.forEach((evt, i) => {
+                const fromIdx = ACTOR_POSITIONS[evt.from] ?? 0;
+                const toIdx = ACTOR_POSITIONS[evt.to] ?? 0;
+                const isRight = toIdx > fromIdx;
+                const left = Math.min(fromIdx, toIdx) * colWidth + colWidth / 2;
+                const width = Math.abs(toIdx - fromIdx) * colWidth;
+                const dir = isRight ? 'right' : 'left';
+                const labelClass = evt.from === 'API' || evt.to === 'API' ? 'api-msg' : dir;
+                const labelLeft = left + width / 2;
+
+                msgsHtml += `<div class="msg-row" style="animation-delay:${i * 0.08}s">`;
+                if (evt.round > 0) {
+                    msgsHtml += `<div class="round-marker">R${evt.round}</div>`;
+                }
+                msgsHtml += `<div class="msg-arrow ${dir}" style="left:${left}px; width:${width}px">`;
+                msgsHtml += `<span class="msg-label ${labelClass}" style="left:50%; transform:translateX(-50%)">${evt.message}</span>`;
+                msgsHtml += `</div></div>`;
+            });
+
+            msgsHtml += '</div></div>';
+            diagram.innerHTML = actorsHtml + msgsHtml;
+        }
+    </script>
+</body>
+</html>
